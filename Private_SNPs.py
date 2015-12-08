@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+# Please note that this script must be heavily changed in order to utilize it for other samples (or addition of more samples)
+
 import csv
 import sys
 
