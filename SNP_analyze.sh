@@ -62,8 +62,7 @@ bursv=$(cat ALL.snpSift.txt | cut -f1,2,5,6 | awk '$4!="0/0"' | awk '$3=="synony
 # Requires REF & GTF file
 # Please not that SNPdat is extremely slow
 # It's recommended that the vcf output file be filtered first to regions of interest before running SNPdat
+
 if [ ! -f ALL.vcf.output ]; then
   perl SNPdat_v1.0.5.pl -i ALL.vcf -f $REFERENCE.fa -g TAIR10.GTF
 fi
-
-# blah test git
