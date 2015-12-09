@@ -15,7 +15,9 @@ GATK=/opt/GATK/3.4.0/GenomeAnalysisTK.jar
 PICARD=/opt/picard/1.81
 ```
 
-The Source.info file is a 2-column tab-delimited file. For example, for our run it looks like this:
+The Source.info file is a 2-column tab-delimited file, with the sample name and URL for its associated BAM file.
+
+For example, for our run it looks like this:
 ```
 bur_0	ftp://ftp.sra.ebi.ac.uk/vol1/ERA023/ERA023479/bam/Bur_0_bur_PII.bam
 Can_0	ftp://ftp.sra.ebi.ac.uk/vol1/ERA023/ERA023479/bam/Can_0_can_PII.bam
