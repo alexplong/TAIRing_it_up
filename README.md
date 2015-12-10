@@ -34,8 +34,22 @@ ATCGTTTTTATGTAATTGCTTATTGTTGTGTGTAGATTTTTTAAAAATATCATTTGAGGTCAATACAAATCCTATTTCT
 TGTGGTTTTCTTTCCTTCACTTAGCTATGGATGGTTTATCTTCATTTGTTATATTGGATACAAGCTTTGCTACGATCTA
 CATTTGGGAATGTGAGTCTCTTATTGTAACCTTAGGGTTGGTTTATCTCAAGAATCTTATTAATTGTTTGGACTGTTTA
 ```
-Some additional notes
-When running GATK's HaplotypeCaller, we hard coded the amount of memory the program should utilize (for our case, 32gb). Please adjust accordingly
+# Some Additional Notes
+
+When running GATK's HaplotypeCaller, we hard coded the amount of memory the program should utilize (for our case, 32gb). Please adjust accordingly.
+GATK was also utilized when calling for SNPs in our second script (SNP_analyze) and memory was also hard coded there, so adjust accordingly again.
 ```
 java -Xmx32g -jar $GATK -T HaplotypeCaller -R $REFERENCE.fa -I $SAMPLE.bam -ERC GVCF -o $SAMPLE.g.vcf -nct $PBS_NUM_PPN -L
 ```
+
+Lastly, we utilized two downstream SNP annotating programs, SNPeff and SNPdat. While both work fantastic, SNPdat generates more readable output, as shown below:
+```
+Chromosome Number	SNP Position	Within a Feature	Region	Distance to nearest feature	Feature	Number of different features for this SNP	Number of annotations for this feature	Start of current feature	End of current feature	gene ID containing the current feature	gene name containing the current feature	transcript ID containing the current feature	transcript name containing the current feature	Annotated Exon [Rank/Total]	Strand sense	Annotated reading Frame	Estimated Reading Frame	Estimated Number of Stop Codons	Codon	Amino Acid	synonymous	Protein ID containing the current feature	Additional Notes
+CHR1	55	Y	Exonic	NA	chromosome	1	[1/1]	1	30427671	ID=Chr1	NA	ID=Chr1	NA	[NA/]	+**	NA	-2	598765	[G/A]GG	[G/R]	N	NA
+CHR1	56	Y	Exonic	NA	chromosome	1	[1/1]	1	30427671	ID=Chr1	NA	ID=Chr1	NA	[NA/]	+**	NA	-2	598765	TT[A/T]	[L/F]	N	NA
+CHR1	346	Y	Exonic	NA	chromosome	1	[1/1]	1	30427671	ID=Chr1	NA	ID=Chr1	NA	[NA/]	+**	NA	-2	598765	[G/A]TT	[V/I]	N	NA
+CHR1	352	Y	Exonic	NA	chromosome	1	[1/1]	1	30427671	ID=Chr1	NA	ID=Chr1	NA	[NA/]	+**	NA	-2	598765	[C/T]CT	[P/S]	N	NA
+CHR1	419	Y	Exonic	NA	chromosome	1	[1/1]	1	30427671	ID=Chr1	NA	ID=Chr1	NA	[NA/]	+**	NA	-2	598765	TA[A/G]	[-/-]	Y	NA
+```
+
+Its problem is that it is extremely slow, so we reccomend first using bedtools or grep to identify specific regions one is interested in first, and then feeding that filtered vcf into SNPdat.
