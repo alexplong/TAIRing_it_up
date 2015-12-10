@@ -16,7 +16,7 @@ PICARD=/opt/picard/1.81
 ```
 
 The Source.info file is a 2-column tab-delimited file, with the sample name and URL for its associated BAM file.
-The reference file should look like the example below. Ensure that the names of the chromosomes associated in the BAM file also match your reference. This check is only necessary if you did not align the sequences yourself and downloaded already aligned BAM files from a study.
+The reference file should look like the example below. Ensure that the names of the chromosomes associated in the BAM file also match your reference. This check is only necessary if you did not align the sequences yourself and downloaded already aligned BAM files from a study. It's also important to provide the PATH to GATK and picard.
 
 For example, for our run it looks like this:
 ```
